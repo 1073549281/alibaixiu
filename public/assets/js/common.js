@@ -1,5 +1,5 @@
 $('#logout').on('click', function() {
-    var isConfirm = confirm('您确定要退出吗?');
+    var isConfirm = confirm('您确定要退出吗');
     if (isConfirm) {
         $.ajax({
             type: 'post',
