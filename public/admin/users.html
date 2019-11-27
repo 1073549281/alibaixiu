@@ -114,8 +114,8 @@
 
     <div class="aside">
         <div class="profile">
-            <img class="avatar" src="../uploads/avatar.jpg">
-            <h3 class="name">Coder</h3>
+            <img class="avatar">
+            <h3 class="name"></h3>
         </div>
         <ul class="nav">
             <li>
@@ -151,6 +151,7 @@
 
     <script src="../assets/vendors/jquery/jquery.js"></script>
     <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/js/common.js"></script>
     <script src="../assets/vendors/art-template/template-web.js"></script>
     <script src="../assets/js/user.js"></script>
     <script>
@@ -167,7 +168,7 @@
             {{/if}}
             <td>{{$value.email}}</td>
             <td>{{$value.nickName}}</td>
-            <td>{{$value.status ==0 ? '未激活' : '激活'}}</td>
+            <td>{{$value.status == 0 ? '未激活' : '激活'}}</td>
             <td>{{$value.role == 'admin' ? '超级管理员' : '普通用户'}}</td>
             <td class="text-center">
                 <a href="javascript:;" class="btn btn-default btn-xs edit" data-id="{{$value._id}}">编辑</a>

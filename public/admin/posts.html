@@ -38,14 +38,13 @@
             <div class="page-action">
                 <!-- show when multiple checked -->
                 <a class="btn btn-danger btn-sm" href="javascript:;" style="display: none">批量删除</a>
-                <form class="form-inline">
-                    <select name="" class="form-control input-sm">
-            <option value="">所有分类</option>
+                <form class="form-inline" id="filterForm">
+                    <select name="category" class="form-control input-sm" id="categoryBox">
+            
           </select>
-                    <select name="" class="form-control input-sm">
-            <option value="">所有状态</option>
-            <option value="">草稿</option>
-            <option value="">已发布</option>
+                    <select name="state" class="form-control input-sm">
+            <option value="0">草稿</option>
+            <option value="1">已发布</option>
           </select>
                     <button class="btn btn-default btn-sm">筛选</button>
                 </form>
@@ -73,8 +72,8 @@
 
     <div class="aside">
         <div class="profile">
-            <img class="avatar" src="../uploads/avatar.jpg">
-            <h3 class="name">Coder</h3>
+            <img class="avatar">
+            <h3 class="name"></h3>
         </div>
         <ul class="nav">
             <li>
@@ -111,6 +110,7 @@
     <script src="../assets/vendors/jquery/jquery.js"></script>
     <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
     <script src="../assets/vendors/art-template/template-web.js"></script>
+    <script src="../assets/js/common.js"></script>
     <script type="text/html" id="postsTpl">
         <!-- 文章列表数据模板 -->
         {{each records}}
@@ -121,21 +121,27 @@
             <td class="text-center">{{$imports.formateDate($value.createAt)}}</td>
             <td class="text-center">{{$value.state == 1 ? '已发布' : '未发布'}}</td>
             <td class="text-center">
-                <a href="javascript:;" class="btn btn-default btn-xs">编辑</a>
-                <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+                <a href="post-add.html?id={{$value._id}}" class="btn btn-default btn-xs">编辑</a>
+                <a href="javascript:;" class="btn btn-danger btn-xs delete" data-id="{{$value._id}}">删除</a>
             </td>
         </tr>
         {{/each}}
-        <!-- 分页模板 -->
-        <script type="text/html" id="pageTpl">
-            {{if page > 1}}
-            <li><a href="javascript:;" onclick="changePage({{page-1}})">上一页</a></li>
-            {{/if}} {{each display}}
-            <li><a href="javascript:;" onclick="changePage({{$value}})">{{$value}}</a></li>
-            {{/each}} {{if page
-            < pages}} <li><a href="javascript:;" onclick="changePage({{page+1}})">下一页</a></li>
-                {{/if}}
-        </script>
+    </script>
+    <!-- 分页模板 -->
+    <script type="text/html" id="pageTpl">
+        {{if page > 1}}
+        <li><a href="javascript:;" onclick="changePage({{page-1}})">上一页</a></li>
+        {{/if}} {{each display}}
+        <li><a href="javascript:;" onclick="changePage({{$value}})">{{$value}}</a></li>
+        {{/each}} {{if page
+        < pages}} <li><a href="javascript:;" onclick="changePage({{page+1}})">下一页</a></li>
+            {{/if}}
+    </script>
+    <!-- 分类列表下拉模板 -->
+    <script type="text/html" id="categoryTpl">
+        {{each data}}
+        <option value="{{$value._id}}">{{$value.title}}</option>
+        {{/each}}
     </script>
     <script src="../assets/js/post.js"></script>
     <script>

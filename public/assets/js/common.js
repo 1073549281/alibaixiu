@@ -13,3 +13,16 @@ $('#logout').on('click', function() {
         })
     }
 })
+
+
+// 向服务器端发送请求 索要登录用户信息
+$.ajax({
+    type: 'get',
+    url: '/users/' + userId,
+    success: function(response) {
+        console.log(response);
+
+        $('.profile .avatar').attr('src', response.avatar)
+        $('.profile .name').html(response.nickName)
+    }
+})
